@@ -11,7 +11,10 @@
     "url": "git+https://github.com/singhnsatya/dropbox-paper.git"
   },
   "author": "",
-  "license": "MIT",
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/singhnsatya/dropbox-paper/LICENSE"
+  },
   "keywords": [
     "dropbox-paper",
     "dropbox paper",
