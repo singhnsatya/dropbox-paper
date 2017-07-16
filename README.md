@@ -8,20 +8,25 @@
 
 # How to use
 ```
+
 var dropboxpaper = require("dropbox-paper");
 
 // pass your access token
 var paper = new dropbpaper({accessToken: "Your dropbox paper access token"});
+
 ```
 
 
 # Available Methods
 ```
+
+***Methods***
 paper.listDocs();
 paper.deleteDoc();
 paper.downloadDoc();
 paper.docUsersList();
 paper.docUsersAdd();
+
 ```
 
 
