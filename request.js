@@ -9,23 +9,29 @@ function Request() {
 
 
 Request.prototype.request = function(options, apiMethod) {
-	var future = Q.defer();
-	request(options, function(err, res, body) {
-		if(err) {
-			future.reject(err);
-		} else if (res.statusCode == 400) {
+  var future = Q.defer();
+  request(options, function(err, res, body) {
+    if (err) {
+      future.reject(err);
+    } else if (res.statusCode == 400) {
       return future.reject(body);
     } else if (res.statusCode == 401) {
       return future.reject("Your access token is invalid or expired");
     } else if (res.statusCode == 409) {
       return future.reject(body);
     } else if (res.statusCode >= 200 && res.statusCode < 400) {
-			if(apiMethod == routes.downloadDoc) {
-				var idh = JSON.parse(options["headers"]["Dropbox-API-Arg"]);
+      if (apiMethod == routes.downloadDoc) {
+        var idh = JSON.parse(options["headers"]["Dropbox-API-Arg"]);
         body = body.split('\n');
-        body = body[0] == '' ? {'id': idh.doc_id, 'name': "Untitled"} : {'id': idh.doc_id, 'name': body[0].replace('# ', '')}
+        body = body[0] == '' ? {
+          'id': idh.doc_id,
+          'name': "Untitled"
+        } : {
+          'id': idh.doc_id,
+          'name': body[0].replace('# ', '')
+        }
         return future.resolve(body);
-			} else {
+      } else {
         try {
           if (typeof(body) === 'string')
             body = JSON.parse(body);
@@ -35,14 +41,14 @@ Request.prototype.request = function(options, apiMethod) {
         return future.resolve(body);
       }
     }
-	});
-	return future.promise;
+  });
+  return future.promise;
 }
 
 
 Request.prototype.requestDownload = function(options, head) {
   var future = Q.defer();
-  this.name = head && head.filename ? head.filename+".txt" : 'download.txt';
+  this.name = head && head.filename ? head.filename + ".txt" : 'download.txt';
   var that = this;
   var req = request(options)
   req.pipe(fs.createWriteStream(that.name));
@@ -60,5 +66,5 @@ Request.prototype.requestDownload = function(options, head) {
 
 
 module.exports = function() {
-	return new Request();
+  return new Request();
 }
