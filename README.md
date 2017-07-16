@@ -91,7 +91,7 @@ Pass doc id and members to add any user to the doc.<br>
 For more information [see docs](https://www.dropbox.com/developers/documentation/http/documentation#paper-docs-users-list)
 ```javascript
 // Example
-paper.docUsersList({"doc_id":"zYsQe7JwyGV77Onbt2UJO","members":[{"member":{".tag":"email","email":"user email"},"permission_level":{".tag":"edit"}}]})
+paper.docUsersAdd({"doc_id":"zYsQe7JwyGV77Onbt2UJO","members":[{"member":{".tag":"email","email":"user email"},"permission_level":{".tag":"edit"}}]})
 .then(function(result){
 console.log(result);
 })
