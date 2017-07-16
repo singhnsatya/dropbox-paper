@@ -1,0 +1,13 @@
+{
+	"endpoint": "https://api.dropboxapi.com/2/paper",
+	"listDocs": "/docs/list",
+	"listDocsContinue": "/docs/list/continue",
+	"downloadDoc": "/docs/download",
+	"usersList": "/docs/users/list",
+	"docUsersAdd": "/docs/users/add",
+  "docUsersList": "/docs/users/list",
+  "folderUsersList": "/docs/folder_users/list",
+  "deleteDoc": "/docs/permanently_delete"
+}
+
+
