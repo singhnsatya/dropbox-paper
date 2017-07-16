@@ -12,7 +12,7 @@
 var dropboxpaper = require("dropbox-paper");
 
 // pass your access token
-var paper = new dropbpaper({accessToken: "Your dropbox paper access token"});
+var paper = new dropboxpaper({accessToken: "Your dropbox paper access token"});
 
 ```
 
