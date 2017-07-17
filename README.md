@@ -113,7 +113,7 @@ console.log(error);
 ```
 
 ## Doc Policy Set
-Currently only supports public_sharing_policy. Pass doc id on which you want to set policy.
+Currently only supports public_sharing_policy.<br> Pass doc id on which you want to set policy. <br>
 For more information [see docs](https://www.dropbox.com/developers/documentation/http/documentation#paper-docs-sharing_policy-set)
 ```javascript
 // Example

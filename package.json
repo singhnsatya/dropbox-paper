@@ -1,6 +1,6 @@
 {
   "name": "dropbox-paper",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "dropbox paper sdk",
   "main": "index.js",
   "scripts": {
