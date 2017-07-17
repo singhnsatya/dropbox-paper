@@ -14,7 +14,13 @@ Base.prototype.listDocs = function(data) {
   var future = Q.defer();
   var that = this;
   var finalRes = {};
-  that.makeOptions('POST', routes.listDocs, data)
+  var apiMethod;
+  if (data && data.cursor) {
+    apiMethod = routes.listDocsContinue;
+  } else {
+    apiMethod = routes.listDocs;
+  }
+  that.makeOptions('POST', apiMethod, data)
     .then(function(options, api) {
       return that.api.request(options, api);
     })
@@ -122,6 +128,22 @@ Base.prototype.deleteDoc = function(data) {
   return future.promise;
 }
 
+Base.prototype.archiveDoc = function(data) {
+  var future = Q.defer();
+  var that = this;
+  that.makeOptions('POST', routes.archiveDoc, data)
+    .then(function(options) {
+      return that.api.request(options, routes.archiveDoc)
+    })
+    .then(function(result) {
+      return future.resolve("Doc Archived Successfully.");
+    })
+    .catch(function(err) {
+      return future.reject(err);
+    })
+  return future.promise;
+}
+
 Base.prototype.downloadDoc = function(data) {
   var future = Q.defer();
   var that = this;
@@ -136,6 +158,22 @@ Base.prototype.downloadDoc = function(data) {
     .catch(function(err) {
       future.reject(err);
     });
+  return future.promise;
+}
+
+Base.prototype.docPolicySet = function(data) {
+  var future = Q.defer();
+  var that = this;
+  that.makeOptions('POST', routes.docPolicySet, data)
+    .then(function(options) {
+      return that.api.request(options, routes.docPolicySet)
+    })
+    .then(function(result) {
+      return future.resolve("Doc Sharing Policy Updated Successfully.");
+    })
+    .catch(function(err) {
+      return future.reject(err);
+    })
   return future.promise;
 }
 
@@ -160,10 +198,6 @@ Base.prototype.makeOptions = function(method, route, body) {
       'Content-Type': 'application/json'
     }
   }
-  if (route == routes.listDocs) {
-    that.options.json = body;
-    future.resolve(that.options, route);
-  }
   if (route == routes.downloadDoc) {
     delete that.options.headers["Content-Type"];
     that.options.headers["Dropbox-API-Arg"] = http_header_safe_json({
@@ -173,8 +207,7 @@ Base.prototype.makeOptions = function(method, route, body) {
       }
     });
     future.resolve(that.options);
-  }
-  if (route == routes.docUsersAdd || route == routes.docUsersList || route == routes.folderUsersList || route == routes.deleteDoc) {
+  } else {
     if (body && typeof(body) == "string")
       body = JSON.parse(body);
     that.options.json = body;
