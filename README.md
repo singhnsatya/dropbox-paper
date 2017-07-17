@@ -119,9 +119,9 @@ For more information [see docs](https://www.dropbox.com/developers/documentation
 // Example
 paper.docPolicySet({"doc_id":"P6evXjsBzf0l0ZZrbYVlf","sharing_policy":{"public_sharing_policy":{".tag":"people_with_link_can_view_and_comment"}}})
 .then(function(result) {
-	console.log(result);
+console.log(result);
 }).catch(function(error) {
-	console.log(error);
+console.log(error);
 })
 ```
 
@@ -130,10 +130,10 @@ Pass doc id of doc you want to archive.
 ```javascript
 // Example
 paper.archiveDoc({doc_id: "y5JzeuLkuBJNhlTfjXr2L"})
-.then(function(res) {
-	console.log('res--', res);
-}).catch(function(err) {
-	console.log('caught err', err);
+.then(function(result) {
+console.log(result);
+}).catch(function(error) {
+console.log(error);
 })
 ```
 
